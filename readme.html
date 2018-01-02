@@ -1,0 +1,87 @@
+<html>
+<head><title>Beginning Algorithms - Code Examples</title></head>
+<body>
+<h1>Beginning Algorithms - Code Examples</h1>
+<p>This file contains information on and instructions for building<a href="#note1"><sup>1</sup></a> the source code accompanying the book Beginning Algorithms,
+Simon Harris &amp; James Ross, Wrox Press, 2005.</p>
+
+<h2>Understanding the Directory Layout</h2>
+<p>The source files are divided into two directories -- one for production classes (<code>main</code>)
+and one for test classes (<code>test</code>) -- arranged into packages by chapter as follows:</p>
+
+<p><table border="2" width="100%" cellpadding="3" cellspacing="0">
+  <tbody>
+    <tr><th align="left" colspan="2">Packages</th></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.iteration</a></code></td><td>Chapter 2 - Iteration and Recursion</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.lists</code></td><td>Chapter 3 - Lists</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.queues</code></td><td>Chapters 4 &amp; 8 - Queues &amp; Priority Queues</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.stacks</code></td><td>Chapter 5 - Stacks</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.sorting</code></td><td>Chapters 6 &amp; 8 - Basic &amp; Advanced Sorting</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.bsearch</code></td><td>Chapter 9 - Binary Searching</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.bstrees</code></td><td>Chapter 10 - Binary Search Trees</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.hashing</code></td><td>Chapter 11 - Hashing</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.sets</code></td><td>Chapter 12 - Sets</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.maps</code></td><td>Chapter 13 - Maps</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.tstrees</code></td><td>Chapter 14 - Ternary Search Trees</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.btrees</code></td><td>Chapter 15 - B-Trees</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.ssearch</code></td><td>Chapter 16 - String Searching</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.wmatch</code></td><td>Chapter 17 - Word Matching</td></tr>
+    <tr><td width="20%"><code>com.wrox.algorithms.geometry</code></td><td>Chapter 18 - Computational Geometry</td></tr>
+  </tbody>
+</table></p>
+
+<a name="compiling">
+<h2>Compiling the Classes</h2>
+<p>The production classes are self-contained -- they don't have any dependencies on external class libraries etc. So, to compile the
+production classes for Chapter 3 -- Lists -- enter the following command:</p>
+
+<p><pre>  javac -sourcepath main main/com/wrox/algorithms/lists/*.java</pre></p>
+
+<p>This invokes the compiler telling it to compile all production files in the <code>com.wrox.algorithms.lists</code> package.</p>
+
+<p>Notice the the <code>-sourcepath main</code> option. This tells the compiler where to look for any other files it may need. For example,
+in this case, the code for Chapter 3 depends on the code for Chapter 2 -- Iteration and Recursion -- so the compiler needs to know
+where to look to find the dependent source files.</p>
+
+<p>Compiling the test classes is similar except for one thing: they depend on <a href="http://www.junit.org/">JUnit</a>. So, in
+order to compile the test classes, you will first need to download a copy of JUnit from
+<a href="http://prdownloads.sourceforge.net/junit/junit3.8.1.zip?download">here</a> and extract the <code>junit.jar</code> file.
+Once this is done, you can compile the test classes for Chapter 3 by entering the following command:</p>
+
+<p><pre>  javac -classpath junit.jar -sourcepath main test/com/wrox/algorithms/lists/*.java</pre></p>
+
+<p>This invokes the compiler telling it to compile all test files in the <code>com.wrox.algorithms.lists</code> package<a href="note3"><sup>2</sup></a>.</p>
+
+<p>Once again, notice the extra <code>-sourcepath main</code> option telling the compiler where to look for any other files it may need.</p>
+
+<h2>Running the Tests</h2>
+<p>Once you have the java classes compiled, you can try running some of the test cases using one of the JUnit test runners. For example,
+to run the <code>ArrayListTest</code> from Chapter 3 using the text-based runner, enter the following command:</p>
+
+<p><pre>  java -classpath junit.jar:main:test junit.textui.TestRunner com.wrox.algorithms.lists.ArrayListTest</pre></p>
+
+<p>You should then see some output similar to the following:</p>
+
+<p><pre>  .........................
+  Time: 0.021
+
+  OK (25 tests)</pre></p>
+
+<p>This indicates that a total of 25 tests were executed in a time of 0.021 seconds and that all tests passed (OK).</p>
+
+<p>For a report that uses a graphical user interface, try the following instead:</p>
+
+<p><pre>  java -classpath junit.jar:main:test junit.<strong>swingui</strong>.TestRunner com.wrox.algorithms.lists.ArrayListTest</pre></p>
+
+<p>Notice the use of <code>swingui</code> instead of <code>textui</code>.
+<hr border="0" height="1">
+<h2>Notes</h2>
+<a name="note1">
+<p><sup>1</sup>Assuming you are building from the command-line. If you are using an IDE, please refer to the appropriate
+documentation supplied with the tool.</p>
+
+<a name-"note2">
+<p><sup>3</sup>Interestingly, compiling the test classess in this way also compiles the production classes as well, enabling you to
+quickly compile both in one go.</p>
+</body>
+</html>
