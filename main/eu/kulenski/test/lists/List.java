@@ -15,7 +15,7 @@ public interface List extends Iterable {
     public void insert(int index, Object value)
             throws IndexOutOfBoundException;
     public void add(int index, Object value);
-    public void delete(int index) throws IndexOutOfBoundException;
+    public Object delete(int index) throws IndexOutOfBoundException;
     public boolean delete(Object value);
     public void clear();
     public Object set(int index, Object value)

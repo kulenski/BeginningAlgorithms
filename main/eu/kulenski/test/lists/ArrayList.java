@@ -50,13 +50,31 @@ public class ArrayList implements List {
     }
 
     @Override
-    public void delete(int index) throws IndexOutOfBoundException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object delete(int index) throws IndexOutOfBoundException {
+       checkOutOfBounds(index);
+       
+       Object value = _list[index];
+       int copyFromIndex = index + 1;
+       if(copyFromIndex < _size) {
+           System.arraycopy(_list, copyFromIndex, _list, 
+                   index, _size - copyFromIndex);
+       }
+       _list[--_size] = null;
+       
+       reduceCapacityIfNecessary();
+       
+       return value;
     }
 
     @Override
     public boolean delete(Object value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int index = indexOf(value);
+        if(index > -1) {
+            delete(index);
+            return true;
+        }
+        
+        return false;
     }
 
     @Override
@@ -97,7 +115,7 @@ public class ArrayList implements List {
 
     @Override
     public boolean contains(Object value) {
-        return indexOf(value) != -1;
+        return indexOf(value) >= 0;
     }
 
     @Override
@@ -123,6 +141,14 @@ public class ArrayList implements List {
             System.arraycopy(_list, 0, copy, 0, _size);
             _list = copy;
         } 
+    }
+    
+    private void reduceCapacityIfNecessary() {
+        if(_size < _list.length/2) {
+            Object[] copy = new Object[_size + _size/2];
+            System.arraycopy(_list, 0, copy, 0, _size);
+            _list = copy;
+        }
     }
     
     private void checkOutOfBounds(int index) {
